@@ -263,6 +263,12 @@ def main():
     usage = '%prog -p PACKAGE [-V [X.Y][-][A.B]] DIR [-X REGEXPR]\n'
     parser = OptionParser(usage, version='%prog DEVELV',
                           option_class=Option)
+    parser.add_option('--keep-pyc', action='store_false',
+                      dest='remove_pyc', default=True,
+                      help='Keep *.pyc files')
+    parser.add_option('--remove-py', action='store_true',
+                      dest='remove_py', default=False,
+                      help='Remove *.py files')
     parser.add_option('--no-guessing-versions', action='store_false',
                       dest='guess_versions', default=True,
                       help='disable guessing other supported Python versions')

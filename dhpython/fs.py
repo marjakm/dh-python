@@ -107,9 +107,17 @@ def share_files(srcdir, dstdir, interpreter, options):
 
 class Scan:
     UNWANTED_DIRS = re.compile(r'.*/__pycache__(/.*)?$')
-    UNWANTED_FILES = re.compile(r'.*\.py[co]$')
 
     def __init__(self, interpreter, package, dpath=None, options=None):
+        if options.remove_py and options.remove_pyc:
+            self.UNWANTED_FILES = re.compile(r'.*\.py[co]?$')
+        elif not options.remove_py and options.remove_pyc:
+            self.UNWANTED_FILES = re.compile(r'.*\.py[co]$')
+        elif options.remove_py and not options.remove_pyc:
+            self.UNWANTED_FILES = re.compile(r'.*\.py[o]?$')
+        elif not options.remove_py and not options.remove_pyc:
+            self.UNWANTED_FILES = re.compile(r'.*\.pyo$')
+
         self.interpreter = interpreter
         self.impl = interpreter.impl
 
@@ -229,7 +237,7 @@ class Scan:
         return self.__class__.UNWANTED_DIRS.match(dpath)
 
     def is_unwanted_file(self, fpath):
-        if self.__class__.UNWANTED_FILES.match(fpath):
+        if self.UNWANTED_FILES.match(fpath):
             return True
         if self.current_pub_version and self.is_dbg_package\
                 and self.options.clean_dbg_pkg\

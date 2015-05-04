@@ -1,3 +1,9 @@
+dh-python (1.20150429-mattis1) vivid; urgency=medium
+
+  * Add --keep-pyc and --remove-py options to dh_python2 and dh_python3
+
+ -- Mattis Marjak <mattis.marjak@defendec.com>  Wed, 29 Apr 2015 23:03:20 +0300
+
 dh-python (1.20141111-2) unstable; urgency=medium
 
   * Remove Multi-Arch change from previous upload (not accepted for Jessie by
@@ -33,7 +39,7 @@ dh-python (1.20141026-1) unstable; urgency=medium
   * Add argparse to Python 3.X's dist fallback (closes: 763200)
   * Ensure that Depends and the likes are written in a stable
     order (closes: 759231, thanks to Jérémy Bobbio for the patch)
-  * Remove dh_python2 diversions while upgrading from bpo package 
+  * Remove dh_python2 diversions while upgrading from bpo package
   * Standards-Version bumped to 3.9.6 (no changes needed)
 
  -- Piotr Ożarowski <piotr@debian.org>  Sun, 26 Oct 2014 23:32:57 +0100
